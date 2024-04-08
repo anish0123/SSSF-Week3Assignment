@@ -87,6 +87,7 @@ const postCat = (url: string | Function, cat: CatTest): Promise<CatTest> => {
         if (err) {
           reject(err);
         } else {
+          console.log('response.body.cat: ', response.body.data);
           const newCat = response.body.data.createCat;
           expect(newCat).toHaveProperty('id');
           expect(newCat.cat_name).toBe(cat.catName);

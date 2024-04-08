@@ -31,10 +31,10 @@ type Query {
     catById(id: ID!): Cat
     cats: [Cat]
     catsByArea(topRight:String!, bottomLeft:String!): [Cat]
-    catsByOwner(owner: ID!): [Cat]
+    catsByOwner(ownerId: ID!): [Cat]
 }
 
-input PointInput {
+input LocationInput {
   type: GeoJSONPOintType!,
   """
   Coordinates in [longitude, latitude] format
@@ -48,7 +48,7 @@ input CatInput {
     birthdate: DateTime!
     owner: ID!
     filename: String!
-    location: PointInput!
+    location: LocationInput!
 }
 
 input CatModifyInput {
@@ -57,7 +57,7 @@ input CatModifyInput {
     birthdate: DateTime
     owner: ID
     filename: String
-    location: PointInput
+    location: LocationInput
 }
 
 type CatMessage {
@@ -66,8 +66,8 @@ type CatMessage {
 }
 
 type Mutation {
-    createCat(cat: CatInput!): Cat
-    updateCat(id: ID!, cat: CatModifyInput!): Cat
+    createCat(cat_name: String!, weight: Float!, birthdate: DateTime!, owner: ID!, location: LocationInput!, filename: String!): Cat
+    updateCat(id: ID!, cat_name: String, weight: Float, birthdate: DateTime, owner: ID, location: LocationInput, filename: String): Cat
     deleteCat(id: ID!): Cat
 }
 

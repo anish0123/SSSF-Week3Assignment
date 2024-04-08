@@ -9,6 +9,7 @@
 // 2.2. updateCat
 // 2.3. deleteCat
 
+import mongoose from 'mongoose';
 import {Cat} from '../../interfaces/Cat';
 import catModel from '../models/catModel';
 
@@ -24,8 +25,8 @@ export default {
       }
       return cat;
     },
-    catsByOwner: async (_parent: undefined, args: {owner: string}) => {
-      const cats = await catModel.find({owner: args.owner});
+    catsByOwner: async (_parent: undefined, args: {ownerId: string}) => {
+      const cats = await catModel.find({owner: args.ownerId});
       if (cats.length === 0) {
         throw new Error('Cat not found');
       }
@@ -54,9 +55,23 @@ export default {
   Mutation: {
     createCat: async (
       _parent: undefined,
-      args: {cat: Omit<Cat, '_id'>}
+      args: {
+        cat_name: String;
+        weight: Number;
+        birthdate: Date;
+        owner: mongoose.Schema.Types.ObjectId;
+        location: Location;
+        filename: String;
+      }
     ): Promise<Cat> => {
-      const newCat = await catModel.create(args.cat);
+      const newCat = await catModel.create({
+        cat_name: args.cat_name,
+        weight: args.weight,
+        birthdate: args.birthdate,
+        owner: args.owner,
+        location: args.location,
+        filename: args.filename,
+      });
       if (!newCat) {
         throw new Error('Error creating cat');
       }
@@ -64,11 +79,30 @@ export default {
     },
     updateCat: async (
       _parent: undefined,
-      args: {id: string; cat: Omit<Cat, '_id'>}
+      args: {
+        id: string;
+        cat_name?: String;
+        weight?: Number;
+        birthdate?: Date;
+        owner?: mongoose.Schema.Types.ObjectId;
+        location?: Location;
+        filename: String;
+      }
     ): Promise<Cat> => {
-      const updatedCat = await catModel.findByIdAndUpdate(args.id, args.cat, {
-        new: true,
-      });
+      const updatedCat = await catModel.findByIdAndUpdate(
+        args.id,
+        {
+          cat_name: args.cat_name,
+          weight: args.weight,
+          birthdate: args.birthdate,
+          owner: args.owner,
+          location: args.location,
+          filename: args.filename,
+        },
+        {
+          new: true,
+        }
+      );
       if (!updatedCat) {
         throw new Error('Cat not found');
       }
