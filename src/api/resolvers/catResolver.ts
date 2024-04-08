@@ -12,6 +12,7 @@
 import mongoose from 'mongoose';
 import {Cat} from '../../interfaces/Cat';
 import catModel from '../models/catModel';
+import {Point} from 'geojson';
 
 export default {
   Query: {
@@ -60,7 +61,7 @@ export default {
         weight: Number;
         birthdate: Date;
         owner: mongoose.Schema.Types.ObjectId;
-        location: Location;
+        location: Point;
         filename: String;
       }
     ): Promise<Cat> => {
@@ -85,7 +86,7 @@ export default {
         weight?: Number;
         birthdate?: Date;
         owner?: mongoose.Schema.Types.ObjectId;
-        location?: Location;
+        location?: Point;
         filename: String;
       }
     ): Promise<Cat> => {
