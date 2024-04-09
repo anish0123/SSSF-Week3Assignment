@@ -13,6 +13,7 @@ import mongoose from 'mongoose';
 import {Cat} from '../../interfaces/Cat';
 import catModel from '../models/catModel';
 import {Point} from 'geojson';
+import {coordinates} from '../../interfaces/Location';
 
 export default {
   Query: {
@@ -35,10 +36,10 @@ export default {
     },
     catsByArea: async (
       _parent: undefined,
-      args: {topRight: string; bottomLeft: string}
+      args: {topRight: coordinates; bottomLeft: coordinates}
     ) => {
-      const rightCorner = args.topRight.split(',');
-      const leftCorner = args.bottomLeft.split(',');
+      const rightCorner = [args.topRight.lat, args.topRight.lng];
+      const leftCorner = [args.bottomLeft.lat, args.bottomLeft.lng];
 
       const cats = await catModel.find({
         location: {

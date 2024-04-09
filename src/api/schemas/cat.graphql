@@ -18,6 +18,11 @@ type Cat {
     location: Point
 }
 
+input Coordinates {
+  lat: Float
+  lng: Float
+}
+
 type Point {
   type: GeoJSONPOintType,
   coordinates: [Float]
@@ -30,7 +35,7 @@ enum GeoJSONPOintType {
 type Query {
     catById(id: ID!): Cat
     cats: [Cat]
-    catsByArea(topRight:String!, bottomLeft:String!): [Cat]
+    catsByArea(topRight:Coordinates!, bottomLeft:Coordinates!): [Cat]
     catsByOwner(ownerId: ID!): [Cat]
 }
 
