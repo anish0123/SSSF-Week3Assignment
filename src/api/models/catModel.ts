@@ -1,6 +1,3 @@
-// mongoose schema for cat
-// intface User is located in src/interfaces/Cat.ts
-
 import mongoose from 'mongoose';
 import {Cat} from '../../interfaces/Cat';
 

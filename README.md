@@ -1,4 +1,4 @@
-# SSSF week 3 exercise. Submit to Oma
+# SSSF week 3 exercise.
 
 Convert the REST API from last weeks assignment to GraphQL.
 
@@ -11,12 +11,6 @@ Convert the REST API from last weeks assignment to GraphQL.
 - `npm i` to install dependencies
 - `npm run dev` to start development server
 - `npm run test` to run tests
-
-## Assignment
-
-- Your task is to complete all TODOs in the code until all tests are passed
-- Note that file upload needs to be done with Rest API. Endpoint: `api/vi/upload`
-  - endpoint needs to return object defined in UploadMessageResponse interface.
 
 ### Interfaces
 

@@ -1,6 +1,3 @@
-// mongoose schema for user
-// intface User is located in src/interfaces/User.ts
-
 import mongoose from 'mongoose';
 import {User} from '../../interfaces/User';
 
